@@ -1,8 +1,5 @@
 package lab05_b;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Orientation;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -50,21 +47,22 @@ public class Lab05_B extends Application {
         desserts.getItems().addAll("Apple Pie", "Carrot Cake", "Mud Pie", "Pudding", "Apple Crisp");
         root.add(dessert, 0, 3);
         root.add(desserts, 1, 3);
-        
+
         Slider slider = new Slider(0.0, 20.0, 15.0);
+        slider.setShowTickMarks(true);
         Label sliderLabel = new Label("");
+        Label total = new Label();
         root.add(slider, 0, 4);
         root.add(sliderLabel, 0, 5);
         slider.setOnMouseReleased(e -> {
             sliderLabel.setText(trunc(slider.getValue()) + "%");
+            double totalPrice = (1 + trunc(slider.getValue())/100) 
+                                * (8);
+            total.setText("The total is " + trunc(totalPrice) + "$");
         });
-        
-        Label total = new Label();
-        double totalPrice = trunc(slider.getValue()) * (2);
-        total.setText("The total is " + totalPrice + "$");
         root.add(total, 0, 6);
         
-        Scene scene = new Scene(root, 600, 400);
+        Scene scene = new Scene(root, 400, 400);
         stage.setScene(scene);
         stage.show();
     }
