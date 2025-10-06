@@ -1,6 +1,7 @@
 package lab05_b;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -50,17 +51,23 @@ public class Lab05_B extends Application {
 
         Slider slider = new Slider(0.0, 20.0, 15.0);
         slider.setShowTickMarks(true);
-        Label sliderLabel = new Label("");
-        Label total = new Label();
-        root.add(slider, 0, 4);
-        root.add(sliderLabel, 0, 5);
+        Label sliderLabel = new Label("15%");
+        Label tip = new Label("Tip (%)");
+        Label total = new Label("The total is 0.00$");
+        root.add(tip, 0, 4);
+        root.add(slider, 0, 5);
+        root.add(sliderLabel, 0, 6);
         slider.setOnMouseReleased(e -> {
             sliderLabel.setText(trunc(slider.getValue()) + "%");
             double totalPrice = (1 + trunc(slider.getValue())/100) 
                                 * (8);
             total.setText("The total is " + trunc(totalPrice) + "$");
         });
-        root.add(total, 0, 6);
+        root.add(total, 0, 7);
+        
+        Button clear = new Button("Clear Bill");
+        
+        root.add(clear, 1, 7);
         
         Scene scene = new Scene(root, 400, 400);
         stage.setScene(scene);
